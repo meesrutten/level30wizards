@@ -1,0 +1,41 @@
+	<script src="./scripts/libs/TweenMax.min.js"></script>
+	<script src="./scripts/libs/TimelineMax.min.js"></script>
+	<script src="./scripts/libs/barba.min.js"></script>
+	<script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+	<script src="./scripts/index.js"></script>
+	<script src="./sw.js"></script>
+
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118352256-1"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-118352256-1');
+
+	/**
+	* Functie die klikken op een uitgaande link in Analytics bijhoudt.
+	* Deze functie vereist een geldige URL-tekenreeks als argument en gebruikt de betreffende URL-tekenreeks
+	* als eventlabel. Wanneer de methode 'transport' wordt ingesteld op 'beacon', wordt de hit verzonden
+	* bij gebruik van 'navigator.sendBeacon' in de browser die dat ondersteunt.
+	*/
+	var trackOutboundLink = function(url) {
+	ga('send', 'event', 'outbound', 'click', url, {
+		'transport': 'beacon',
+		'hitCallback': function(){document.location = url;}
+	});
+	} 
+
+	document.querySelectorAll('a').forEach( function(link) {
+		link.addEventListener('click', function(event){
+			trackOutboundLink(event.target.href);
+			return false;
+		})
+	})
+	</script>
+
+</body>
+
+</html>

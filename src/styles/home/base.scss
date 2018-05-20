@@ -1,0 +1,81 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font: $fontBody;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: antialiased;
+    // background-color: black;
+    color: $colorBlack;
+}
+
+.screen-reader-only {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  clip: rect(1px 1px 1px 1px); // IE 6 and 7
+  clip: rect(1px,1px,1px,1px);
+  clip-path: polygon(0px 0px, 0px 0px, 0px 0px);
+  -webkit-clip-path: polygon(0px 0px, 0px 0px, 0px 0px);
+  overflow: hidden !important;
+ }
+
+a {
+  color: $colorBlue;
+  text-decoration: none;
+  // border-bottom: 2px solid $colorBlue;
+  padding-bottom: .1rem;
+  position: relative;
+  transition: color 300ms ease-out;
+  font-weight: 600;
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background-color: $colorBlue;
+    transform-origin: center;
+    transform: scale(0);
+    transition: transform 300ms ease-out;
+  }
+  &:hover {
+    // color: $colorWhite;
+    &::after {
+      transform: scale(1);
+    }
+  }
+}
+a span {
+  color: $colorWhite;
+}
+
+main {
+  display: flex;
+	justify-content: center;
+	align-items: center;
+  min-height: 100vh;
+  flex-flow: column wrap;
+}
+
+::-webkit-scrollbar
+{
+  width: 0.65em;  /* for vertical scrollbars */
+  height: 0.65em; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(255, 255, 255, 1);
+}
+
